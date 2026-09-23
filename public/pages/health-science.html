@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>健康科普 - 智绘青健</title>
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/health-science.css">
+</head>
+<body class="hs-page">
+
+  <header class="home-header">
+    <div class="home-header-inner">
+      <a href="/" class="home-logo">
+        <div class="home-logo-icon">智</div>
+        <span class="home-logo-text">智绘青健</span>
+      </a>
+      <nav class="home-nav">
+        <a href="/">首页</a>
+        <a href="/pages/health-science.html" class="active">健康科普</a>
+        <a href="/#features">功能介绍</a>
+        <a href="/pages/help.html">帮助中心</a>
+      </nav>
+      <div class="home-header-right" id="hsHeaderRight">
+        <a href="/pages/login.html" class="btn-home-login">登录</a>
+        <a href="/pages/register.html" class="btn-home-register">免费注册</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="hs-tabs">
+    <button type="button" class="hs-tab active" data-tab="video">健康科普视频</button>
+    <button type="button" class="hs-tab" data-tab="promo">健康科普宣传</button>
+  </div>
+
+  <!-- 视频板块 -->
+  <div class="hs-panel active" id="panel-video">
+    <div class="video-feed-wrap" id="videoFeedWrap">
+      <span class="video-counter" id="videoCounter">0 / 0</span>
+      <div class="video-feed" id="videoFeed">
+        <div class="video-loading">加载视频中...</div>
+      </div>
+      <div class="speed-menu" id="speedMenu" style="display:none">
+        <div class="speed-menu-title">播放倍速</div>
+        <button type="button" data-rate="1">1x</button>
+        <button type="button" data-rate="1.5">1.5x</button>
+        <button type="button" data-rate="2">2x</button>
+        <button type="button" data-rate="2.5">2.5x</button>
+        <button type="button" data-rate="3">3x</button>
+        <button type="button" data-rate="4">4x</button>
+      </div>
+      <div class="video-action-bar" id="videoActionBar">
+        <button type="button" class="video-action-btn" id="videoLikeBtn" title="喜欢" aria-label="喜欢">
+          <svg class="action-icon-heart" viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          </svg>
+        </button>
+        <button type="button" class="video-comment-btn" id="videoCommentBtn" title="评论" aria-label="打开评论区">
+          <span class="comment-btn-icon" aria-hidden="true">
+            <svg class="comment-icon-svg" viewBox="0 0 60 44" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="28" cy="18" rx="22" ry="16" fill="currentColor"/>
+              <path d="M14 32 L6 40 L18 34 Z" fill="currentColor"/>
+              <circle class="comment-icon-dot" cx="20" cy="18" r="2.2"/>
+              <circle class="comment-icon-dot" cx="28" cy="18" r="2.2"/>
+              <circle class="comment-icon-dot" cx="36" cy="18" r="2.2"/>
+            </svg>
+          </span>
+          <span class="comment-btn-count" id="commentBtnCount"></span>
+        </button>
+        <button type="button" class="video-action-btn" id="videoFavoriteBtn" title="收藏" aria-label="收藏">
+          <svg class="action-icon-star" viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="video-comment-backdrop" id="commentBackdrop"></div>
+      <aside class="video-comment-panel" id="videoCommentPanel" aria-hidden="true">
+        <div class="comment-panel-header">
+          <h3>评论 <span id="commentPanelCount"></span></h3>
+          <button type="button" class="comment-panel-close" id="commentPanelClose" aria-label="关闭">×</button>
+        </div>
+        <div class="comment-list" id="commentList">
+          <p class="comment-empty">暂无评论，快来抢沙发吧</p>
+        </div>
+        <div class="comment-compose" id="commentCompose">
+          <div class="comment-login-hint" id="commentLoginHint">
+            <p>登录后即可发表评论</p>
+            <a href="/pages/login.html" class="btn-comment-login">去登录</a>
+          </div>
+          <form class="comment-form" id="commentForm" style="display:none">
+            <textarea id="commentInput" maxlength="500" rows="3" placeholder="写下你的评论，所有人可见..."></textarea>
+            <button type="submit" class="btn-comment-submit">发送</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- 宣传板块 -->
+  <div class="hs-panel" id="panel-promo">
+    <div class="promo-panel">
+      <div class="promo-inner">
+        <div class="promo-hero">
+          <h1>智绘青健 · 科学认知健康，主动守护青春</h1>
+          <p>大学生全维度健康画像与精准服务平台</p>
+        </div>
+
+        <div class="promo-card clickable" data-promo-id="portrait" role="button" tabindex="0">
+          <h3>什么是全维度健康画像？</h3>
+          <p>全维度健康画像不仅关注身体指标，还涵盖心理、作息、运动、营养等多个维度。平台通过健康评估量表采集数据，将结果可视化呈现，帮助大学生更全面地认识自身健康状况，为精准干预提供依据。</p>
+          <span class="promo-more">查看详情 →</span>
+        </div>
+
+        <div class="promo-card clickable" data-promo-id="assessment" role="button" tabindex="0">
+          <h3>为什么要做健康评估？</h3>
+          <p>早发现、早关注、早调整，往往比等问题严重再处理更有效。智绘青健支持一键创建评估、生成分享链接与二维码，参与者无需注册即可填写，降低健康数据采集门槛，助力校园健康管理。</p>
+          <span class="promo-more">查看详情 →</span>
+        </div>
+
+        <div class="promo-card clickable" data-promo-id="video" role="button" tabindex="0">
+          <h3>健康科普视频能帮你什么？</h3>
+          <p>我们提供校园健康、生活习惯、营养素养等主题短视频，让你在几分钟内获得可实践的健康知识。配合平台上的健康评估与健康画像分析，形成「科普学习 — 数据评估 — 结果分析」的完整闭环。</p>
+          <span class="promo-more">查看详情 →</span>
+        </div>
+
+        <div class="promo-card clickable" data-promo-id="privacy" role="button" tabindex="0">
+          <h3>隐私与使用说明</h3>
+          <p>参与健康评估仅收集必要的分类信息（如性别、年龄段），用于统计分析，不收集可识别个人身份的信息。科普内容仅供健康教育参考，不能替代专业医疗诊断与治疗，如有需要请及时就医或咨询专业人士。</p>
+          <span class="promo-more">查看详情 →</span>
+        </div>
+
+        <div class="promo-cta">
+          <a href="/pages/register.html">立即注册，创建你的第一份健康评估</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="promo-modal-mask" id="promoModal">
+    <div class="promo-modal" role="dialog" aria-modal="true">
+      <button type="button" class="promo-modal-close" id="promoModalClose" aria-label="关闭">×</button>
+      <h2 class="promo-modal-title" id="promoModalTitle"></h2>
+      <div class="promo-modal-body" id="promoModalBody"></div>
+      <div class="promo-modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closePromoModal()">关闭</button>
+        <a href="/pages/register.html" class="btn btn-primary">立即注册</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/health-promo-data.js"></script>
+  <script src="/js/health-science.js"></script>
+</body>
+</html>

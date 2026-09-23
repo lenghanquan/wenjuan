@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注册 - 智绘青健</title>
+  <link rel="stylesheet" href="../css/theme.css">
+</head>
+<body class="auth-page">
+  <header class="auth-header">
+    <div class="auth-header-inner">
+      <a href="/" class="site-logo">
+        <div class="site-logo-icon">智</div>
+        <div>
+          <div class="site-logo-text">智绘青健</div>
+          <span class="site-logo-sub">大学生全维度健康画像与精准服务平台</span>
+        </div>
+      </a>
+      <div class="auth-header-actions">
+        <a href="/" class="btn btn-outline">返回首页</a>
+        <a href="login.html" class="btn btn-primary">立即登录</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="auth-card">
+      <h1>创建账号</h1>
+      <p class="subtitle">注册成为平台用户，开始健康数据采集与服务</p>
+      <form id="registerForm">
+        <div class="form-group">
+          <label>用户名</label>
+          <input type="text" name="username" required placeholder="请输入用户名">
+        </div>
+        <div class="form-group">
+          <label>邮箱</label>
+          <input type="email" name="email" required placeholder="请输入邮箱">
+        </div>
+        <div class="form-group">
+          <label>密码</label>
+          <input type="password" name="password" required placeholder="请输入密码">
+        </div>
+        <button type="submit" class="btn btn-primary">注 册</button>
+        <p class="form-footer">已有账号？<a href="login.html">立即登录</a></p>
+      </form>
+      <div id="message"></div>
+    </div>
+  </main>
+  <script src="../js/register.js"></script>
+</body>
+</html>

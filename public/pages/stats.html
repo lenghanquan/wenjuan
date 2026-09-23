@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>健康画像分析 - 智绘青健</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    .stats-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .stats-toolbar select {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      min-width: 280px;
+    }
+    .total-count {
+      font-size: 16px;
+      color: var(--text-title);
+      font-weight: 600;
+    }
+    .chart-wrapper {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      height: 380px;
+    }
+    .chart-item {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+    .ai-analysis-section {
+      margin-top: 24px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-card);
+    }
+    .ai-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .ai-section-header h2 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--text-title);
+    }
+    .ai-toggle-icon {
+      font-size: 18px;
+      color: var(--text-secondary);
+      transition: 0.3s;
+    }
+    .ai-toggle-icon.collapsed {
+      transform: rotate(-90deg);
+    }
+    .ai-section-content.collapsed {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      margin: 0;
+    }
+    .ai-analysis-btn {
+      margin-top: 12px;
+      padding: 10px 24px;
+      background: var(--success);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .ai-analysis-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .ai-analysis-box {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-page);
+      display: none;
+    }
+    .ai-analysis-content {
+      line-height: 1.8;
+      font-size: 14px;
+      white-space: pre-line;
+      color: var(--text-regular);
+    }
+    .ai-chat-container {
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-page);
+    }
+    .ai-chat-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-title);
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .ai-chat-messages {
+      height: 260px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      margin-bottom: 12px;
+      background: var(--bg-card);
+    }
+    .chat-message {
+      margin-bottom: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      max-width: 80%;
+      font-size: 13px;
+      line-height: 1.6;
+      clear: both;
+    }
+    .user-message {
+      background: var(--primary);
+      color: #fff;
+      float: right;
+    }
+    .ai-message {
+      background: #eef2f7;
+      color: var(--text-regular);
+      float: left;
+    }
+    .ai-chat-input-wrap {
+      display: flex;
+      gap: 10px;
+    }
+    #aiChatInput {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+    }
+    #sendChatBtn {
+      padding: 10px 20px;
+      background: var(--success);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .chart-wrapper { flex-direction: column; height: auto; }
+      .chart-item { height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <a href="/">← 返回首页</a>
+        <a href="/pages/dashboard.html">个人中心</a>
+      </div>
+      <div class="top-bar-right">
+        <a href="javascript:location.href='/api/logout'">退出登录</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-logo">
+        <div class="site-logo-icon">智</div>
+        <div>
+          <div class="site-logo-text">智绘青健</div>
+          <span class="site-logo-sub">大学生全维度健康画像与精准服务平台</span>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <div class="main-nav-inner">
+      <a href="/pages/dashboard.html">健康服务中心</a>
+      <a href="/pages/createSurvey.html">创建健康评估</a>
+      <a href="#" class="active">健康画像分析</a>
+      <a href="/pages/dashboard.html">账号管理</a>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    <h1 class="page-title">健康画像数据分析</h1>
+
+    <div class="content-card">
+      <div class="stats-toolbar">
+        <select id="questionSelect">
+          <option value="">请选择要查看的题目</option>
+        </select>
+        <div class="total-count" id="totalCount">总答题人数：0 人</div>
+      </div>
+
+      <div class="chart-wrapper">
+        <div class="chart-item" id="barChart"></div>
+        <div class="chart-item" id="pieChart"></div>
+      </div>
+
+      <div class="ai-analysis-section">
+        <div class="ai-section-header" id="aiAnalysisHeader">
+          <h2>AI 综合数据分析</h2>
+          <span class="ai-toggle-icon" id="aiAnalysisToggle">▼</span>
+        </div>
+        <div class="ai-section-content" id="aiAnalysisContentWrapper">
+          <p style="color:var(--text-secondary);font-size:13px;margin-top:12px">让 AI 对本评估数据进行综合分析，辅助健康画像解读</p>
+          <button class="ai-analysis-btn" id="aiAnalyzeBtn">生成 AI 综合分析报告</button>
+          <div class="ai-analysis-box" id="aiAnalysisBox">
+            <h3 style="font-size:15px;margin-bottom:10px;color:var(--text-title)">AI 综合分析报告</h3>
+            <div class="ai-analysis-content" id="aiAnalysisContent"></div>
+          </div>
+          <div class="ai-chat-container">
+            <div class="ai-chat-title" id="aiChatHeader">
+              AI 互动聊天
+              <span class="ai-toggle-icon" id="aiChatToggle">▼</span>
+            </div>
+            <div class="ai-chat-content" id="aiChatContentWrapper">
+              <div class="ai-chat-messages" id="chatMessages"></div>
+              <div class="ai-chat-input-wrap">
+                <input type="text" id="aiChatInput" placeholder="输入问题，按回车发送...">
+                <button id="sendChatBtn" onclick="sendChatMessage()">发送</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:28px">
+        <h3 style="font-size:16px;color:var(--text-title);margin-bottom:14px">用户答案详情</h3>
+        <table class="data-table" id="answerTable">
+          <thead>
+            <tr>
+              <th>性别</th>
+              <th>年龄</th>
+              <th>答题时间</th>
+              <th>状态</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/stats.js"></script>
+</body>
+</html>

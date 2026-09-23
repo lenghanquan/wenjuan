@@ -1,0 +1,30 @@
+[
+  {
+    "file": "1.png",
+    "title": "全维度健康画像",
+    "desc": "通过健康评估量表采集数据，构建大学生全维度健康画像",
+    "link": "/pages/register.html",
+    "linkText": "免费注册"
+  },
+  {
+    "file": "2.png",
+    "title": "精准数据分析",
+    "desc": "柱状图、饼图呈现评估结果，性别年龄分布与健康画像一目了然",
+    "link": "/pages/register.html",
+    "linkText": "立即体验"
+  },
+  {
+    "file": "3.png",
+    "title": "健康科普视频",
+    "desc": "校园健康、生活习惯、营养素养等主题短视频，几分钟掌握可实践的健康知识",
+    "link": "/pages/health-science.html",
+    "linkText": "观看科普"
+  },
+  {
+    "file": "4.png",
+    "title": "一键创建健康评估",
+    "desc": "支持生成分享链接与二维码，参与者无需注册即可填写，降低健康数据采集门槛",
+    "link": "/pages/register.html",
+    "linkText": "立即创建"
+  }
+]

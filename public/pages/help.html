@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>帮助中心 - 智绘青健</title>
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/help.css">
+</head>
+<body class="help-page">
+
+  <header class="home-header">
+    <div class="home-header-inner">
+      <a href="/" class="home-logo">
+        <div class="home-logo-icon">智</div>
+        <span class="home-logo-text">智绘青健</span>
+      </a>
+      <nav class="home-nav">
+        <a href="/">首页</a>
+        <a href="/pages/health-science.html">健康科普</a>
+        <a href="/#features">功能介绍</a>
+        <a href="/pages/help.html" class="active">帮助中心</a>
+      </nav>
+      <div class="home-header-right">
+        <a href="/pages/login.html" class="btn-home-login">登录</a>
+        <a href="/pages/register.html" class="btn-home-register">免费注册</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="help-panel">
+    <div class="help-inner">
+      <div class="help-hero">
+        <h1>智绘青健 · 使用帮助</h1>
+        <p>从注册登录到健康评估、数据分析与健康科普，一文掌握平台全流程</p>
+      </div>
+
+      <div class="help-card clickable" data-help-id="register" role="button" tabindex="0">
+        <h3>1. 注册与登录</h3>
+        <p>注册账号、登录系统，进入个人中心开始管理健康评估。</p>
+        <span class="help-more">查看详情 →</span>
+      </div>
+
+      <div class="help-card clickable" data-help-id="create" role="button" tabindex="0">
+        <h3>2. 创建健康评估</h3>
+        <p>在个人中心创建评估量表，添加单选/多选题目并保存管理。</p>
+        <span class="help-more">查看详情 →</span>
+      </div>
+
+      <div class="help-card clickable" data-help-id="share" role="button" tabindex="0">
+        <h3>3. 分享与填写</h3>
+        <p>复制链接或扫码分享，填写者无需注册即可参与健康评估。</p>
+        <span class="help-more">查看详情 →</span>
+      </div>
+
+      <div class="help-card clickable" data-help-id="stats" role="button" tabindex="0">
+        <h3>4. 健康画像分析</h3>
+        <p>查看柱状图、饼图与分类统计，从数据层面理解健康状况。</p>
+        <span class="help-more">查看详情 →</span>
+      </div>
+
+      <div class="help-card clickable" data-help-id="science" role="button" tabindex="0">
+        <h3>5. 健康科普</h3>
+        <p>观看校园健康主题短视频；滚轮切换、左键暂停、右键倍速等操作详见详情。</p>
+        <span class="help-more">查看详情 →</span>
+      </div>
+
+      <div class="help-card clickable" data-help-id="faq" role="button" tabindex="0">
+        <h3>6. 常见问题与说明</h3>
+        <p>参与评估是否需登录、数据如何使用、平台内容能否替代医疗诊断等常见问题。</p>
+        <span class="help-more">查看详情 →</span>
+      </div>
+
+      <div class="help-cta">
+        <a href="/pages/register.html" class="btn-primary">免费注册</a>
+        <a href="/pages/dashboard.html" class="btn-outline">进入个人中心</a>
+        <a href="/pages/health-science.html" class="btn-outline">观看健康科普</a>
+      </div>
+    </div>
+  </main>
+
+  <div class="help-modal-mask" id="helpModal">
+    <div class="help-modal" role="dialog" aria-modal="true">
+      <button type="button" class="help-modal-close" id="helpModalClose" aria-label="关闭">×</button>
+      <h2 class="help-modal-title" id="helpModalTitle"></h2>
+      <div class="help-modal-body" id="helpModalBody"></div>
+      <div class="help-modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeHelpModal()">关闭</button>
+        <a href="/pages/register.html" class="btn btn-primary" id="helpModalAction">相关操作</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/help-data.js"></script>
+  <script src="/js/help.js"></script>
+</body>
+</html>

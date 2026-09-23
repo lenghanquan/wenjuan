@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的健康科普 - 智绘青健</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/my-health-science.css">
+</head>
+<body class="mhs-body">
+
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <span class="welcome">欢迎回来，<strong id="welcomeName">用户</strong></span>
+        <a href="/">返回首页</a>
+        <a href="/pages/dashboard.html">个人中心</a>
+      </div>
+      <div class="top-bar-right">
+        <a href="/pages/help.html">帮助中心</a>
+        <a href="javascript:logout()">退出登录</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-logo" title="返回首页">
+        <div class="site-logo-icon">智</div>
+        <div>
+          <div class="site-logo-text">智绘青健</div>
+          <span class="site-logo-sub">大学生全维度健康画像与精准服务平台</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <button class="btn btn-primary btn-lg" onclick="location.href='/pages/health-science.html'">观看科普视频</button>
+        <button class="btn btn-outline btn-lg" onclick="location.href='/pages/dashboard.html'">返回个人中心</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <div class="main-nav-inner">
+      <a href="/pages/dashboard.html">健康服务中心</a>
+      <a href="/pages/createSurvey.html">创建健康评估</a>
+      <a href="/pages/dashboard.html">健康画像分析</a>
+      <a href="/pages/dashboard.html">账号管理</a>
+      <a href="/pages/my-health-science.html" class="active-mhs">我的健康科普</a>
+    </div>
+  </nav>
+
+  <main class="mhs-main">
+    <div class="mhs-hero">
+      <h1>我的健康科普</h1>
+      <p>管理你喜欢的视频与收藏的视频，点击即可前往观看</p>
+    </div>
+
+    <div class="mhs-tabs">
+      <button type="button" class="mhs-tab active" data-tab="like">喜欢</button>
+      <button type="button" class="mhs-tab" data-tab="favorite">收藏</button>
+    </div>
+
+    <div class="mhs-list" id="mhsList">
+      <div class="mhs-empty">加载中...</div>
+    </div>
+  </main>
+
+  <script src="../js/my-health-science.js"></script>
+</body>
+</html>

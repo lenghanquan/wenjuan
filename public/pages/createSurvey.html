@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创建健康评估 - 智绘青健</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <a href="/">← 返回首页</a>
+        <a href="/pages/dashboard.html">个人中心</a>
+      </div>
+      <div class="top-bar-right">
+        <a href="javascript:location.href='/api/logout'">退出登录</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-logo">
+        <div class="site-logo-icon">智</div>
+        <div>
+          <div class="site-logo-text">智绘青健</div>
+          <span class="site-logo-sub">大学生全维度健康画像与精准服务平台</span>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <div class="main-nav-inner">
+      <a href="/pages/dashboard.html">健康服务中心</a>
+      <a href="/pages/createSurvey.html" class="active">创建健康评估</a>
+      <a href="/pages/dashboard.html">健康画像分析</a>
+      <a href="/pages/dashboard.html">账号管理</a>
+    </div>
+  </nav>
+
+  <div class="page-container">
+    <h1 class="page-title">创建健康评估</h1>
+    <div class="content-card">
+      <form id="createSurveyForm">
+        <div class="form-group">
+          <label>评估名称</label>
+          <input type="text" id="surveyTitle" required placeholder="请输入评估名称">
+        </div>
+        <div class="form-group">
+          <label>评估说明</label>
+          <textarea id="surveyDescription" rows="3" placeholder="简要描述评估用途（可选）"></textarea>
+        </div>
+
+        <h3 style="margin-bottom:16px;color:var(--text-title);font-size:16px">题目列表</h3>
+        <div id="questionsList"></div>
+        <button type="button" class="btn btn-outline" onclick="addQuestion()">+ 添加题目</button>
+
+        <div style="margin-top:28px;display:flex;gap:12px">
+          <button type="submit" class="btn btn-primary btn-lg">创建评估</button>
+          <button type="button" class="btn btn-ghost" onclick="location.href='/pages/dashboard.html'">取消</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-mask" id="shareModal">
+    <div class="modal-content">
+      <h2>评估创建成功！</h2>
+      <p style="color:var(--text-secondary);margin-bottom:8px">分享健康评估链接供他人参与填写</p>
+      <div class="share-link-box">
+        <input type="text" id="surveyShareLink" readonly>
+        <button class="copy-btn" onclick="copyShareLink()">复制</button>
+      </div>
+      <p style="color:var(--text-secondary);font-size:13px">扫码参与评估</p>
+      <img src="" alt="评估二维码" class="qrcode-img" id="surveyQrcode">
+      <div class="modal-btns">
+        <button class="btn btn-primary" onclick="location.href='/pages/dashboard.html'">返回个人中心</button>
+        <button class="btn btn-ghost" onclick="closeModal()">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/createSurvey.js"></script>
+</body>
+</html>

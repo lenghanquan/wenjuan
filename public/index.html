@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智绘青健 - 大学生全维度健康画像与精准服务平台</title>
+  <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/home.css">
+</head>
+<body class="home-page">
+
+  <header class="home-header">
+    <div class="home-header-inner">
+      <a href="/" class="home-logo">
+        <div class="home-logo-icon">智</div>
+        <span class="home-logo-text">智绘青健</span>
+      </a>
+      <nav class="home-nav">
+        <a href="/" class="active">首页</a>
+        <a href="/pages/health-science.html">健康科普</a>
+        <a href="#features">功能介绍</a>
+        <a href="/pages/help.html">帮助中心</a>
+      </nav>
+      <div class="home-search">
+        <input type="text" placeholder="搜索平台功能..." onkeydown="handleQuickSearch(event)">
+        <button type="button" onclick="location.href='/pages/help.html'">🔍</button>
+      </div>
+      <div class="home-header-right">
+        <a href="/pages/login.html" class="btn-home-login">登录</a>
+        <a href="/pages/register.html" class="btn-home-register">免费注册</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-carousel">
+    <div class="carousel-main">
+      <div class="carousel-viewport" id="carouselViewport"></div>
+      <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="上一张">‹</button>
+      <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="下一张">›</button>
+    </div>
+    <div class="carousel-thumbs" id="carouselThumbs"></div>
+  </section>
+
+  <div class="quick-nav-bar">
+    <span class="quick-nav-label">快速导航</span>
+    <div class="quick-nav-tags">
+      <a href="/pages/health-science.html">健康科普</a>
+      <a href="/pages/register.html">创建健康评估</a>
+      <a href="/pages/register.html">分享填写</a>
+      <a href="/pages/register.html">健康画像分析</a>
+      <a href="/pages/register.html">扫码参与</a>
+      <a href="/pages/register.html">免费使用</a>
+    </div>
+  </div>
+
+  <div class="announce-bar">
+    <span class="icon">📢</span>
+    <span>评估链接无需登录即可填写 · 支持全维度健康画像与图表分析 · 注册即可使用全部服务</span>
+    <a href="/pages/register.html">立即注册 →</a>
+  </div>
+
+  <section class="feature-section" id="features">
+    <h2 class="section-title">平台特色</h2>
+    <div class="feature-tabs">
+      <button class="feature-tab active" type="button">官方推荐</button>
+      <button class="feature-tab" type="button">热门功能</button>
+      <button class="feature-tab" type="button">最新更新</button>
+    </div>
+    <div class="feature-grid">
+      <a class="feature-card" href="/pages/register.html">
+        <div class="feature-card-cover c1">📝</div>
+        <div class="feature-card-body">
+          <h4>快速创建健康评估</h4>
+          <div class="feature-card-stats"><span>单选/多选</span><span>免费</span></div>
+        </div>
+      </a>
+      <a class="feature-card" href="/pages/register.html">
+        <div class="feature-card-cover c2">🔗</div>
+        <div class="feature-card-body">
+          <h4>链接与二维码分享</h4>
+          <div class="feature-card-stats"><span>一键复制</span><span>扫码填</span></div>
+        </div>
+      </a>
+      <a class="feature-card" href="/pages/register.html">
+        <div class="feature-card-cover c3">📊</div>
+        <div class="feature-card-body">
+          <h4>健康画像可视化</h4>
+          <div class="feature-card-stats"><span>图表分析</span><span>多维画像</span></div>
+        </div>
+      </a>
+      <a class="feature-card" href="/pages/register.html">
+        <div class="feature-card-cover c4">👥</div>
+        <div class="feature-card-body">
+          <h4>参与无需注册</h4>
+          <div class="feature-card-stats"><span>公开链接</span><span>便捷</span></div>
+        </div>
+      </a>
+      <a class="feature-card" href="/pages/register.html">
+        <div class="feature-card-cover c5">🔒</div>
+        <div class="feature-card-body">
+          <h4>隐私友好设计</h4>
+          <div class="feature-card-stats"><span>分类统计</span><span>安全</span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="float-sidebar">
+    <a href="/pages/help.html" class="float-btn" title="帮助">❓</a>
+    <button class="float-btn" title="注册" onclick="goRegister()">✚</button>
+    <button class="float-btn" title="回到顶部" onclick="scrollToTop()">↑</button>
+  </div>
+
+  <footer class="home-footer">
+    <p>智绘青健 · 大学生全维度健康画像与精准服务平台</p>
+    <p style="margin-top:8px">
+      <a href="/pages/login.html">登录</a>
+      <a href="/pages/register.html">注册</a>
+      <a href="/pages/help.html">帮助</a>
+    </p>
+  </footer>
+
+  <script src="/js/home.js"></script>
+</body>
+</html>

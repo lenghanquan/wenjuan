@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>参与健康评估 - 智绘青健</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    .survey-page-header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      margin-bottom: 20px;
+    }
+    .survey-page-header .inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .survey-container {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 0 16px;
+    }
+    .survey-header-card {
+      background: linear-gradient(135deg, var(--primary) 0%, #3aab9a 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+    .survey-header-card h1 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+    .survey-header-card p {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+    .user-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .user-info-card h3 {
+      font-size: 15px;
+      color: var(--text-title);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .user-info-card .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .text-answer {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      min-height: 100px;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+    }
+    #submitBtn {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body style="background:var(--bg-page)">
+
+  <div class="survey-page-header">
+    <div class="inner">
+      <div class="site-logo-icon" style="width:36px;height:36px;font-size:16px">智</div>
+      <div>
+        <div style="font-weight:700;color:var(--primary);font-size:18px">智绘青健</div>
+        <div style="font-size:12px;color:var(--text-secondary)">大学生全维度健康画像与精准服务平台</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="survey-container">
+    <div class="survey-header-card">
+      <h1 id="surveyTitle">加载中...</h1>
+      <p id="surveyDesc">请稍候，正在加载评估内容...</p>
+    </div>
+
+    <div class="user-info-card">
+      <h3>基本信息（仅用于健康画像统计，不收集隐私）</h3>
+      <div class="form-row">
+        <div class="form-group" style="margin:0">
+          <label>性别</label>
+          <select id="gender" required>
+            <option value="">请选择</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-group" style="margin:0">
+          <label>年龄</label>
+          <select id="age" required>
+            <option value="">请选择</option>
+            <option value="18以下">18以下</option>
+            <option value="18-30">18-30</option>
+            <option value="31-45">31-45</option>
+            <option value="45以上">45以上</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div id="questionsContainer">
+      <div class="empty-tip">正在加载题目...</div>
+    </div>
+
+    <button id="submitBtn" class="btn btn-primary" style="display:none">提交评估</button>
+    <div id="message"></div>
+  </div>
+
+  <script src="../js/survey.js"></script>
+</body>
+</html>

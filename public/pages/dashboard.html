@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人中心 - 智绘青健</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body class="dashboard-body">
+
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-left">
+        <span class="welcome">欢迎回来，<strong id="welcomeName">用户</strong></span>
+        <a href="/">返回首页</a>
+        <a href="#surveyListSection">个人中心</a>
+        <a href="#surveyListSection">我的评估</a>
+      </div>
+      <div class="top-bar-right">
+        <a href="/pages/help.html">帮助中心</a>
+        <a href="javascript:logout()">退出登录</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a href="/" class="site-logo" title="返回首页">
+        <div class="site-logo-icon">智</div>
+        <div>
+          <div class="site-logo-text">智绘青健</div>
+          <span class="site-logo-sub">大学生全维度健康画像与精准服务平台</span>
+        </div>
+      </a>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="搜索我的评估...">
+        <button id="searchBtn">搜索</button>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-primary btn-lg" onclick="location.href='/pages/createSurvey.html'">创建健康评估</button>
+        <button class="btn btn-outline btn-lg" onclick="viewLatestStats()">健康画像分析</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <div class="main-nav-inner">
+      <a href="/pages/dashboard.html" class="active">健康服务中心</a>
+      <a href="/pages/createSurvey.html">创建健康评估</a>
+      <a href="javascript:viewLatestStats()">健康画像分析</a>
+      <a href="javascript:deleteAccount()">账号管理</a>
+      <a href="/pages/my-health-science.html">我的健康科普</a>
+    </div>
+  </nav>
+
+  <div class="dashboard-main">
+
+    <aside class="sidebar-left">
+      <div class="sidebar-title">评估分类</div>
+      <ul class="filter-list">
+        <li class="active" onclick="setFilter('all', this)">全部评估</li>
+        <li onclick="setFilter('recent', this)">最近创建</li>
+        <li onclick="setFilter('hasResponse', this)">有答卷</li>
+        <li onclick="setFilter('empty', this)">无答卷</li>
+      </ul>
+    </aside>
+
+    <main class="center-content">
+
+      <div class="banner-carousel">
+        <div class="banner-slide active">
+          <h2>快速创建健康评估</h2>
+          <p>支持单选、多选题目，一键生成分享链接与二维码，轻松采集健康数据</p>
+          <button class="btn btn-lg" style="background:#fff;color:var(--primary);width:fit-content" onclick="location.href='/pages/createSurvey.html'">立即创建</button>
+        </div>
+        <div class="banner-slide">
+          <h2>分享链接 · 扫码参与</h2>
+          <p>参与者无需注册登录，打开链接或扫描二维码即可参与健康评估</p>
+          <button class="btn btn-lg" style="background:#fff;color:var(--primary);width:fit-content" onclick="copyLatestLink()">复制最近链接</button>
+        </div>
+        <div class="banner-slide">
+          <h2>健康画像可视化</h2>
+          <p>柱状图、饼图展示评估结果，性别年龄与健康画像分布一目了然</p>
+          <button class="btn btn-lg" style="background:#fff;color:var(--primary);width:fit-content" onclick="viewLatestStats()">查看分析</button>
+        </div>
+        <div class="banner-dots">
+          <span class="banner-dot active"></span>
+          <span class="banner-dot"></span>
+          <span class="banner-dot"></span>
+        </div>
+      </div>
+
+      <div class="feature-cards">
+        <div class="feature-card" onclick="copyLatestLink()">
+          <div class="feature-card-icon share">🔗</div>
+          <div class="feature-card-text">
+            <h4>分享参与</h4>
+            <p>生成链接 / 二维码，他人无需登录即可填写</p>
+          </div>
+        </div>
+        <div class="feature-card" onclick="viewLatestStats()">
+          <div class="feature-card-icon stats">📊</div>
+          <div class="feature-card-text">
+            <h4>健康画像洞察</h4>
+            <p>查看评估结果占比与多维健康画像分布</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="survey-section" id="surveyListSection">
+        <div class="section-header">
+          <h3>我的评估 <span style="font-weight:normal;color:var(--text-secondary);font-size:13px">（共 <span id="surveyListCount">0</span> 份）</span></h3>
+          <button class="btn btn-primary" onclick="location.href='/pages/createSurvey.html'">+ 新建评估</button>
+        </div>
+        <div class="survey-grid" id="surveyList">
+          <div class="empty-tip">加载中...</div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="sidebar-right">
+      <div class="user-card">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <div class="username" id="usernameDisplay">用户</div>
+        <div class="role">健康管理员</div>
+        <div class="user-stats">
+          <div class="user-stat-item">
+            <div class="num" id="surveyCount">0</div>
+            <div class="label">已创建</div>
+          </div>
+          <div class="user-stat-item">
+            <div class="num" id="responseCount">0</div>
+            <div class="label">总答卷</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">系统公告</div>
+        <div class="card-body">
+          <ul class="announcement-list">
+            <li><span class="tag new">新</span>创建评估后可直接复制链接分享</li>
+            <li><span class="tag">提示</span>删除评估将同时清空所有答卷记录</li>
+            <li><span class="tag">提示</span>AI 综合分析功能维护中，敬请期待</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">我的功能</div>
+        <div class="card-body">
+          <div class="func-grid">
+            <button class="func-item" onclick="location.href='/'">
+              <div class="func-item-icon">🏠</div>首页
+            </button>
+            <button class="func-item" onclick="location.href='/pages/createSurvey.html'">
+              <div class="func-item-icon">➕</div>创建
+            </button>
+            <button class="func-item" onclick="scrollToList()">
+              <div class="func-item-icon">📋</div>列表
+            </button>
+            <button class="func-item" onclick="viewLatestStats()">
+              <div class="func-item-icon">📊</div>分析
+            </button>
+            <button class="func-item" onclick="copyLatestLink()">
+              <div class="func-item-icon">🔗</div>分享
+            </button>
+            <button class="func-item" onclick="scrollToList()">
+              <div class="func-item-icon">🗑</div>删除
+            </button>
+            <button class="func-item" onclick="deleteAccount()">
+              <div class="func-item-icon">⚠️</div>注销
+            </button>
+            <a class="func-item" href="/pages/help.html">
+              <div class="func-item-icon">❓</div>帮助
+            </a>
+            <button class="func-item" onclick="logout()">
+              <div class="func-item-icon">🚪</div>退出
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="quick-bar">
+    <div class="quick-bar-inner">
+      <a class="quick-item" href="/">
+        <div class="quick-item-icon">🏠</div><span>返回首页</span>
+      </a>
+      <a class="quick-item" href="/pages/createSurvey.html">
+        <div class="quick-item-icon">➕</div><span>创建评估</span>
+      </a>
+      <a class="quick-item" href="javascript:viewLatestStats()">
+        <div class="quick-item-icon">📊</div><span>画像分析</span>
+      </a>
+      <a class="quick-item" href="javascript:copyLatestLink()">
+        <div class="quick-item-icon">🔗</div><span>复制分享</span>
+      </a>
+      <a class="quick-item" href="#surveyListSection">
+        <div class="quick-item-icon">📋</div><span>我的评估</span>
+      </a>
+      <a class="quick-item" href="/pages/help.html">
+        <div class="quick-item-icon">❓</div><span>帮助中心</span>
+      </a>
+    </div>
+  </div>
+
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
