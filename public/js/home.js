@@ -54,6 +54,51 @@ function updateHeaderForLoggedIn(username) {
     <a href="/pages/dashboard.html" class="btn-home-register">进入个人中心</a>
     <a href="/api/logout" class="btn-home-login">退出</a>
   `;
+  // 登录后：快速导航 / 特色卡片 / 公告栏 全部指向真实功能页，不再跳注册页
+  updateFeatureLinksForLoggedIn();
+}
+
+// 登录后把首页各处"假链接"改成对应功能页
+function updateFeatureLinksForLoggedIn() {
+  // 快速导航标签
+  const quickMap = {
+    '创建健康评估': '/pages/createSurvey.html',
+    '分享填写': '/pages/dashboard.html',
+    '健康画像分析': '/pages/stats.html',
+    '扫码参与': '/pages/dashboard.html',
+    '免费使用': '/pages/dashboard.html'
+  };
+  document.querySelectorAll('.quick-nav-tags a').forEach(a => {
+    const t = a.textContent.trim();
+    if (quickMap[t]) a.href = quickMap[t];
+  });
+
+  // 平台特色卡片
+  const cardMap = {
+    '快速创建健康评估': '/pages/createSurvey.html',
+    '链接与二维码分享': '/pages/dashboard.html',
+    '健康画像可视化': '/pages/stats.html',
+    '参与无需注册': '/pages/health-science.html',
+    '隐私友好设计': '/pages/dashboard.html'
+  };
+  document.querySelectorAll('.feature-card').forEach(card => {
+    const h4 = card.querySelector('h4');
+    if (h4 && cardMap[h4.textContent.trim()]) card.href = cardMap[h4.textContent.trim()];
+  });
+
+  // 公告栏右侧按钮：登录后改为"进入平台"
+  const announceLink = document.querySelector('.announce-bar a');
+  if (announceLink) {
+    announceLink.href = '/pages/dashboard.html';
+    announceLink.textContent = '进入平台 →';
+  }
+
+  // 悬浮注册按钮改为跳转个人中心
+  const floatPlus = document.querySelector('.float-sidebar button[title="注册"]');
+  if (floatPlus) {
+    floatPlus.title = '个人中心';
+    floatPlus.setAttribute('onclick', 'location.href="/pages/dashboard.html"');
+  }
 }
 
 function buildCarousel() {
@@ -71,11 +116,6 @@ function buildCarousel() {
     slide.className = 'carousel-slide' + (i === 0 ? ' active' : '');
     slide.innerHTML = `
       <img src="${b.image}" alt="${escapeHtml(b.title)}">
-      <div class="carousel-caption">
-        <h2>${escapeHtml(b.title)}</h2>
-        <p>${escapeHtml(b.desc)}</p>
-        <a href="${escapeHtml(b.link)}" class="btn-cta">${escapeHtml(b.linkText)}</a>
-      </div>
     `;
     viewport.appendChild(slide);
 

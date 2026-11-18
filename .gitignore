@@ -7,3 +7,16 @@ Thumbs.db
 .idea/
 .vscode/
 .imga-cache/
+
+# 发布中间产物（勿提交）
+*.zip
+wenjuan-修改版-发布包/
+wenjuan-修改版-发布包.zip
+
+# AI_SCI experiment artifacts（论文实验数据，不上线运行）
+AI_SCI/.venv/
+AI_SCI/data/raw/
+AI_SCI/data/synthetic/
+AI_SCI/data/results/
+AI_SCI/**/__pycache__/
+AI_SCI/**/*.pyc

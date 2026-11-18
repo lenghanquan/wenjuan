@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ResponseQualityFields",
+  "type": "object",
+  "properties": {
+    "survey": { "type": "string" },
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "questionId": { "type": "string" },
+          "answer": {}
+        },
+        "required": ["questionId", "answer"]
+      }
+    },
+    "userInfo": {
+      "type": "object",
+      "properties": {
+        "gender": { "type": "string" },
+        "age": { "type": "string" }
+      }
+    },
+    "startedAt": { "type": "string", "format": "date-time" },
+    "submittedAt": { "type": "string", "format": "date-time" },
+    "durationMs": { "type": "number" },
+    "questionEvents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "questionId": { "type": "string" },
+          "firstAnswerAt": { "type": "string", "format": "date-time" },
+          "lastAnswerAt": { "type": "string", "format": "date-time" },
+          "changeCount": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "shareId": { "type": "string" },
+    "parentShareId": { "type": ["string", "null"] },
+    "responseBatchId": { "type": "string" },
+    "ipHash": { "type": "string" },
+    "uaHash": { "type": "string" },
+    "sessionFingerprint": { "type": "string" },
+    "qualityScore": { "type": ["number", "null"] },
+    "isSuspectedLowQuality": { "type": ["boolean", "null"] },
+    "detectionReasons": { "type": "array", "items": { "type": "string" } },
+    "modelVersion": { "type": ["string", "null"] },
+    "detectedAt": { "type": ["string", "null"], "format": "date-time" },
+    "label": {
+      "type": ["string", "null"],
+      "enum": ["normal", "low_quality", "synthetic", "uncertain", null]
+    },
+    "isSynthetic": { "type": "boolean" },
+    "injectionStrategy": { "type": ["string", "null"] },
+    "injectionBatch": { "type": ["string", "null"] }
+  }
+}

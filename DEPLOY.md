@@ -1,6 +1,7 @@
 # 零成本上云部署指南（GitHub + MongoDB Atlas + Render）
 
-本项目已支持环境变量，本地与云端均可运行。
+本项目已支持环境变量，本地与云端均可运行。  
+线上为**产品站**（创建/分享/填写问卷、健康科普）。质量检测相关代码仅保留在 `AI_SCI/` 供论文实验，不进入线上业务路径。
 
 ## 一、本地先验证
 
@@ -9,29 +10,32 @@
 3. 安装依赖并启动：
 
 ```bash
+cd D:\问卷系统
 npm install
 npm start
 ```
 
 打开：http://localhost:3000/
 
-## 二、推到 GitHub
+## 二、推到 GitHub（更新已有站点）
 
-1. 在 GitHub 新建仓库
-2. 本机执行：
+仓库：`https://github.com/lenghanquan/wenjuan.git`
+
+在**仓库根目录**执行（不要嵌套 `wenjuan-修改版-发布包` 文件夹）：
 
 ```bash
 cd D:\问卷系统
-git init
 git add .
-git commit -m "ready for free deploy"
-git branch -M main
-git remote add origin https://github.com/你的用户名/仓库名.git
-git push -u origin main
+git status
+git commit -m "deploy product site for survey share and data"
+git push origin main
 ```
 
-说明：`.gitignore` 已忽略 `node_modules`、`.env`。  
-`imga/` 里的科普视频若单文件过大（GitHub 约 100MB 限制）或免费套餐磁盘不够，请先压缩再推送，或改为外链播放。
+说明：
+
+- `.gitignore` 已忽略 `node_modules`、`.env`、zip、发布包文件夹
+- `imga/` 视频单文件需小于约 100MB（当前已满足）
+- 推送后 Render 一般会自动重新部署；也可在控制台点 Manual Deploy
 
 ## 三、创建免费数据库（MongoDB Atlas）
 
@@ -48,7 +52,7 @@ mongodb+srv://用户名:密码@cluster0.xxxxx.mongodb.net/surveySystem?retryWrit
 ## 四、用 Render 免费部署
 
 1. 打开 https://render.com ，用 GitHub 登录
-2. New → **Web Service** → 选择本仓库
+2. New → **Web Service** → 选择本仓库 `lenghanquan/wenjuan`
 3. 配置：
 
 | 项 | 值 |
@@ -75,7 +79,7 @@ mongodb+srv://用户名:密码@cluster0.xxxxx.mongodb.net/surveySystem?retryWrit
 - 打开 `BASE_URL` 看首页
 - 注册 / 登录
 - 创建健康评估，复制分享链接（应是公网地址）
-- 健康科普等功能按需自测
+- 手机或无痕窗口打开链接，提交答卷，后台能看到统计
 
 ## 注意
 

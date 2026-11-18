@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ShareLinkFields",
+  "type": "object",
+  "properties": {
+    "shareId": { "type": "string", "description": "UUID used in survey.html?id=" },
+    "shareLink": { "type": "string", "description": "/pages/survey.html?id=<shareId>" },
+    "creatorId": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "parentShareId": {
+      "type": ["string", "null"],
+      "description": "Optional referral share; usually null in v1"
+    }
+  },
+  "required": ["shareId", "shareLink", "creatorId"]
+}
